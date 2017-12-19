@@ -1,5 +1,5 @@
 Summary
 =======
 
-* ./01-at-its-most-basic/README.asciidoc[At its most basic]
+* 01-at-its-most-basic/README.asciidoc[At its most basic]
 * http://asciidoctor.org[Asciidoctor]
