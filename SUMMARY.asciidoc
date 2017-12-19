@@ -1,4 +1,4 @@
 Summary
 =======
 
-* 01-at-its-most-basic/README.asciidoc[At its most basic]
+* link:01-at-its-most-basic/README.asciidoc[At its most basic]
