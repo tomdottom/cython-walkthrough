@@ -1,0 +1,14 @@
+= Before you start
+
+The other chapters assume that you have Cython installed and ready to use.
+
+If all other build tools are present on your system installing Cython can easily be installed using `pip`.
+
+```
+virtualenv .cython
+source .cython/bin/activate
+pip install cython
+```
+
+If you find you are missing and prereuisits please refer to the Cython documentation
+http://docs.cython.org/en/latest/src/quickstart/install.html

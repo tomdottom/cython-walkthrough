@@ -1,4 +1,5 @@
 Summary
 =======
 
+* link:00-before-you-start/README.asciidoc[Before you start]
 * link:01-at-its-most-basic/README.asciidoc[At its most basic]

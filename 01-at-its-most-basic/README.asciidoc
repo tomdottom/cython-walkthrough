@@ -1,7 +1,12 @@
-At its most basic
-=================
+= At its most basic
+Tom Marks <thomas.o.marks@gmail.com>
+v0.1, 2017-12-19
 
-Create the following **hello.py** file:
+To understand what Cython does it's easiest to start by looking at how turn a _Python Module_ into a compiled _Extension Module_. The _Extension Module_ can be imported just at the _Python Module_ is.
+
+== Create a simple _Python Module_
+
+To start create the following `hello.py` file in an empty directory:
 
 **hello.py**
 ```
@@ -9,18 +14,20 @@ print 'hello world'
 
 ```
 
-Obeserve that this is the only file
+Obverse that this is the only file:
 ```
 $ ls -1
 
 hello.py
 ```
 
-`Cythonize` *hello.py* using the `--inplace` flag to build a _shared object_ in the same path as the source flie.
-Observe that an *hello.c* intermediary is created which is compiled into the *hello.so* shared object.
+== Turn a _Python Module_ into a C compiled _Extension Module_
+
+Now `Cythonize` the `hello.py` module using the `--inplace` flag to build the _Extension Module_ as _shared object_ in the same path as the source file.
+Observe that a `hello.c` intermediary is created which is compiled into the `hello.so` shared object.
 
 ```
-$ cythonize --inplace hello.py 
+$ cythonize --inplace hello.py
 Compiling /tmp/tmp.iQ8pjSOIDu/hello.py because it changed.
 [1/1] Cythonizing /tmp/tmp.iQ8pjSOIDu/hello.py
 running build_ext
@@ -39,10 +46,12 @@ hello.py
 hello.so
 ```
 
+== Observe that Python imports the _Extension Module_
+
 Start the Python interpreter and import the `hello` module. We should see that Python is using the newly created `hello.so` shared object.
 ```
 $ python
-Python 2.7.14 (default, Sep 20 2017, 01:25:59) 
+Python 2.7.14 (default, Sep 20 2017, 01:25:59)
 [GCC 7.2.0] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import hello
@@ -50,3 +59,15 @@ hello world
 >>> hello.__file__
 'hello.so'
 ```
+
+== A slighly deep understanding of what is actually going on
+
+Python makes it farily easyfootnote:[https://docs.python.org/2/extending/extending.html] to add new built-in modules as long as you can program in C/C++ (or other possible Golang, Rust, etc ...).
+
+Cython takes this one step further and generates C code from Python code. Whilst it may not achieve the top end performance of hand crafted C code, you do get to leverage Python syntax a productive coding idioms.
+
+Compiling Python without using any of the additional annotations and static typing can provide speed gains of 20%-50% footnote:[http://cython.readthedocs.io/en/latest/src/tutorial/pure.html]
+
+Adding Cython type annotations via various mechanisms can improve upon this.
+
+Lastly for _Extension Modules_ can be code using the Cython language which is a superset of Python.
