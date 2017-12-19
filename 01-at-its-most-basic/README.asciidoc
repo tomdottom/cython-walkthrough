@@ -1,2 +1,52 @@
 At its most basic
 =================
+
+Create the following **hello.py** file:
+
+**hello.py**
+```
+print 'hello world'
+
+```
+
+Obeserve that this is the only file
+```
+$ ls -1
+
+hello.py
+```
+
+`Cythonize` *hello.py* using the `--inplace` flag to build a _shared object_ in the same path as the source flie.
+Observe that an *hello.c* intermediary is created which is compiled into the *hello.so* shared object.
+
+```
+$ cythonize --inplace hello.py 
+Compiling /tmp/tmp.iQ8pjSOIDu/hello.py because it changed.
+[1/1] Cythonizing /tmp/tmp.iQ8pjSOIDu/hello.py
+running build_ext
+building 'hello' extension
+creating /tmp/tmp.iQ8pjSOIDu/tmptejda7/tmp
+creating /tmp/tmp.iQ8pjSOIDu/tmptejda7/tmp/tmp.iQ8pjSOIDu
+gcc -pthread -fno-strict-aliasing -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong -fno-plt -DNDEBUG -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong -fno-plt -fPIC -I/usr/include/python2.7 -c /tmp/tmp.iQ8pjSOIDu/hello.c -o /tmp/tmp.iQ8pjSOIDu/tmptejda7/tmp/tmp.iQ8pjSOIDu/hello.o
+gcc -pthread -shared -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now /tmp/tmp.iQ8pjSOIDu/tmptejda7/tmp/tmp.iQ8pjSOIDu/hello.o -L/usr/lib -lpython2.7 -o /tmp/tmp.iQ8pjSOIDu/hello.so
+```
+
+```
+$ ls -1
+
+hello.c
+hello.py
+hello.so
+```
+
+Start the Python interpreter and import the `hello` module. We should see that Python is using the newly created `hello.so` shared object.
+```
+$ python
+Python 2.7.14 (default, Sep 20 2017, 01:25:59) 
+[GCC 7.2.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import hello
+hello world
+>>> hello.__file__
+'hello.so'
+```
