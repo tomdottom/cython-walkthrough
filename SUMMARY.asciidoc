@@ -1,4 +1,4 @@
 Summary
 =======
 
-http://asciidoctor.org[Asciidoctor]
+* http://asciidoctor.org[Asciidoctor]
